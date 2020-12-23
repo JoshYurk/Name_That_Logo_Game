@@ -114,7 +114,7 @@ namespace Name_That_Logo_Game
             playerWindow.LoadImage(null);
         }
 
-        public static void ShowDialog(string caption)
+        public static void ShowScreenSelectDialog(string caption)
         {
             prompt = new Form
             {
@@ -168,7 +168,7 @@ namespace Name_That_Logo_Game
 
         private void InitializePlayerScreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowDialog("Screen Select");
+            ShowScreenSelectDialog("Screen Select");
         }
     }
 }
