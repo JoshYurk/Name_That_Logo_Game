@@ -32,7 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,6 +64,12 @@
     <Compile Include="GamePlayer_Window.Designer.cs">
       <DependentUpon>GamePlayer_Window.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageSearchWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageSearchWindow.Designer.cs">
+      <DependentUpon>ImageSearchWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameMaster_Window.resx">
@@ -65,6 +77,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GamePlayer_Window.resx">
       <DependentUpon>GamePlayer_Window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageSearchWindow.resx">
+      <DependentUpon>ImageSearchWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +90,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
