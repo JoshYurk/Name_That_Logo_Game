@@ -70,13 +70,59 @@ namespace Name_That_Logo_Game
 
         private void Confirmation_Click(object sender, EventArgs e)
         {
-            var playerWindow = new GamePlayer_Window();
-            SetFormLocation(playerWindow, playerScreen);
-            playerWindow.Show();
+            if (playerScreen.Primary)
+            {
+                var dialogResult = MessageBox.Show("Setting Player Screen to the primary screen will cover up the controlling window and prevent playing. Do you want to set it anyway?", "Confirmation", MessageBoxButtons.YesNo);
 
-            playerWindow.Shown += PlayerWindow_Shown;
-            usedScreens.Add(playerScreen);
-            player_Windows.Add(playerWindow);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var playerWindow = new GamePlayer_Window();
+                    SetFormLocation(playerWindow, playerScreen);
+                    playerWindow.Show();
+                    playerWindow.Shown += PlayerWindow_Shown;
+                    playerWindow.FormClosed += PlayerWindow_FormClosed;
+                    usedScreens.Add(playerScreen);
+                    player_Windows.Add(playerWindow);
+                }
+            }
+            else
+            {
+                var playerWindow = new GamePlayer_Window();
+                SetFormLocation(playerWindow, playerScreen);
+                playerWindow.Show();
+                playerWindow.Shown += PlayerWindow_Shown;
+                playerWindow.FormClosed += PlayerWindow_FormClosed;
+                usedScreens.Add(playerScreen);
+                player_Windows.Add(playerWindow);
+            }
+        }
+
+        private void PlayerWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!(sender is GamePlayer_Window player_Window))
+            {
+                MessageBox.Show("Sender is not a GamePlayer_Window");
+                return;
+            }
+
+            var index = player_Windows.IndexOf(player_Window);
+            usedScreens.RemoveAt(index);
+            player_Windows.RemoveAt(index);
+
+            if (Screen.AllScreens.Length != usedScreens.Count)
+            {
+                initializePlayerScreenToolStripMenuItem.Enabled = true;
+            }
+
+            if (player_Windows.Count == 0)
+            {
+                playerWindowInitialized = false;
+                sendImageToPlayerWindow.Enabled = false;
+                resetPlayerScreenToolStripMenuItem.Enabled = false;
+                clearPlayerImageToolStripMenuItem.Enabled = false;
+                minimizePlayerScreenToolStripMenuItem.Enabled = false;
+                maximizePlayerScreenToolStripMenuItem.Enabled = false;
+            }
         }
 
         private static void ListBox_SelectedIndexChanged(object sender, EventArgs e)

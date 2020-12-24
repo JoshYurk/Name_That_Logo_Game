@@ -134,10 +134,10 @@ namespace Name_That_Logo_Game
             }
         }
 
-        private async void Button1_Click(object sender, EventArgs e)
+        private async void SearchButton_Click(object sender, EventArgs e)
         {
-            var searchTerm = textBox1.Text;
-            var count = (int)numericUpDown1.Value;
+            var searchTerm = this.searchTermInput.Text;
+            var count = (int)imageCounter.Value;
 
             var images = await RunAsync(searchTerm, count, SafeSearchValue);
             ImageList.AddRange(images);
