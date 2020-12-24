@@ -10,7 +10,8 @@ namespace Name_That_Logo_Game
     {
         private static Button confirmation;
         private static Screen playerScreen;
-        private static GamePlayer_Window playerWindow;
+        private static List<GamePlayer_Window> player_Windows;
+        private static List<Screen> usedScreens;
         private static Form prompt;
         private static ListBox screenSelectListBox;
         int imageIndex = 0;
@@ -18,14 +19,13 @@ namespace Name_That_Logo_Game
         List<Image> images;
         private ImageSearchWindow imageSearchWindow;
         private bool playerWindowInitialized = false;
-        private bool imageSearchWindowInitialized;
 
         public GameMaster_Window()
         {
             InitializeComponent();
         }
 
-        public static void ShowScreenSelectDialog(string caption)
+        public void ShowScreenSelectDialog(string caption)
         {
             prompt = new Form
             {
@@ -38,13 +38,16 @@ namespace Name_That_Logo_Game
 
             foreach (var screen in Screen.AllScreens)
             {
-                int index = Array.IndexOf(Screen.AllScreens, screen) + 1;
-                string device_name = screen.DeviceName;
-                bool isPrimary = screen.Primary;
+                if (!usedScreens.Contains(screen))
+                {
+                    int index = Array.IndexOf(Screen.AllScreens, screen) + 1;
+                    string device_name = screen.DeviceName;
+                    bool isPrimary = screen.Primary;
 
-                var item = index + ") " + device_name + (isPrimary ? " - Primary Screen" : "");
+                    var item = index + ") " + device_name + (isPrimary ? " - Primary Screen" : "");
 
-                screenSelectListBox.Items.Add(item);
+                    screenSelectListBox.Items.Add(item);
+                }
             }
 
             screenSelectListBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
@@ -65,10 +68,15 @@ namespace Name_That_Logo_Game
             prompt.Close();
         }
 
-        private static void Confirmation_Click(object sender, EventArgs e)
+        private void Confirmation_Click(object sender, EventArgs e)
         {
+            var playerWindow = new GamePlayer_Window();
             SetFormLocation(playerWindow, playerScreen);
             playerWindow.Show();
+
+            playerWindow.Shown += PlayerWindow_Shown;
+            usedScreens.Add(playerScreen);
+            player_Windows.Add(playerWindow);
         }
 
         private static void ListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,15 +100,18 @@ namespace Name_That_Logo_Game
 
         private void ClearPlayerImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            playerWindow.ClearImage();
+            foreach (GamePlayer_Window player_Window in player_Windows)
+            {
+                player_Window.ClearImage();
+            }
         }
 
         private void GameMaster_Window_Load(object sender, EventArgs e)
         {
             imageList = new List<string>();
             images = new List<Image>();
-            playerWindow = new GamePlayer_Window();
-            playerWindow.Shown += PlayerWindow_Shown;
+            player_Windows = new List<GamePlayer_Window>();
+            usedScreens = new List<Screen>();
         }
 
         private void PlayerWindow_Shown(object sender, EventArgs e)
@@ -111,6 +122,11 @@ namespace Name_That_Logo_Game
             minimizePlayerScreenToolStripMenuItem.Enabled = true;
             resetPlayerScreenToolStripMenuItem.Enabled = true;
             clearPlayerImageToolStripMenuItem.Enabled = true;
+
+            if (usedScreens.Count == Screen.AllScreens.Length)
+            {
+                initializePlayerScreenToolStripMenuItem.Enabled = false;
+            }
 
             if (imageList.Count > 0 || images.Count > 0)
             {
@@ -125,16 +141,22 @@ namespace Name_That_Logo_Game
 
         private void MaximizePlayerScreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            playerWindow.TopMost = true;
-            playerWindow.FormBorderStyle = FormBorderStyle.None;
-            playerWindow.WindowState = FormWindowState.Maximized;
+            foreach (GamePlayer_Window playerWindow in player_Windows)
+            {
+                playerWindow.TopMost = true;
+                playerWindow.FormBorderStyle = FormBorderStyle.None;
+                playerWindow.WindowState = FormWindowState.Maximized;
+            }
         }
 
         private void MinimizePlayerScreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            playerWindow.TopMost = false;
-            playerWindow.FormBorderStyle = FormBorderStyle.None;
-            playerWindow.WindowState = FormWindowState.Minimized;
+            foreach (GamePlayer_Window playerWindow in player_Windows)
+            {
+                playerWindow.TopMost = false;
+                playerWindow.FormBorderStyle = FormBorderStyle.None;
+                playerWindow.WindowState = FormWindowState.Minimized;
+            }
         }
 
         private void NextImageButton_Click(object sender, EventArgs e)
@@ -189,10 +211,13 @@ namespace Name_That_Logo_Game
 
         private void ResetPlayerScreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            playerWindow.TopMost = false;
-            playerWindow.FormBorderStyle = FormBorderStyle.Sizable;
-            playerWindow.WindowState = FormWindowState.Normal;
-            playerWindow.ControlBox = true;
+            foreach (GamePlayer_Window playerWindow in player_Windows)
+            {
+                playerWindow.TopMost = false;
+                playerWindow.FormBorderStyle = FormBorderStyle.Sizable;
+                playerWindow.WindowState = FormWindowState.Normal;
+                playerWindow.ControlBox = true;
+            }
         }
 
         private void retieveSearchedImagesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -236,14 +261,17 @@ namespace Name_That_Logo_Game
 
         private void SendImageToPlayerWindowButton_Click(object sender, EventArgs e)
         {
-            if (images.Count > 0)
+            foreach (GamePlayer_Window playerWindow in player_Windows)
             {
-                Image image = images.ElementAt(imageIndex);
-                playerWindow.LoadImage(image);
-            }
-            else if (imageList.Count > 0)
-            {
-                playerWindow.LoadImage(imageList[imageIndex]);
+                if (images.Count > 0)
+                {
+                    Image image = images.ElementAt(imageIndex);
+                    playerWindow.LoadImage(image);
+                }
+                else if (imageList.Count > 0)
+                {
+                    playerWindow.LoadImage(imageList[imageIndex]);
+                }
             }
         }
     }

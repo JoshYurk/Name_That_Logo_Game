@@ -88,6 +88,7 @@ namespace Name_That_Logo_Game
 
         private static void PopulateImageList(Dictionary<string, object> response)
         {
+            ImageUrls.Clear();
             var images = response["value"] as Newtonsoft.Json.Linq.JToken;
 
             foreach (Newtonsoft.Json.Linq.JToken image in images)
