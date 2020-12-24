@@ -12,14 +12,9 @@ namespace Name_That_Logo_Game
     public partial class ImageSearchWindow : Form
     {
         private const string COUNT_PARAMETER = "&count=";
-        private const string MKT_PARAMETER = "&mkt=";
-        // Strongly suggested
-        private const string OFFSET_PARAMETER = "&offset=";
-
-        private const string QUERY_PARAMETER = "?q=";
-        // Required
+        private const string MKT_PARAMETER = "&mkt="; // Strongly suggested
+        private const string QUERY_PARAMETER = "?q="; // Required
         private const string SAFE_SEARCH_PARAMETER = "&safeSearch=";
-
         private static readonly string _baseUri = "https://api.bing.microsoft.com/v7.0/images/search";
         private static readonly string _marketCode = "en-us";
         private static readonly string _subscriptionKey = "849552c6f7bd47e3b40b0f45789f2e97";
