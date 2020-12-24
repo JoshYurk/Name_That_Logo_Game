@@ -235,7 +235,7 @@
             this.searchForImagesToolStripMenuItem.Name = "searchForImagesToolStripMenuItem";
             this.searchForImagesToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
             this.searchForImagesToolStripMenuItem.Text = "Search For Images";
-            this.searchForImagesToolStripMenuItem.Click += new System.EventHandler(this.searchForImagesToolStripMenuItem_Click);
+            this.searchForImagesToolStripMenuItem.Click += new System.EventHandler(this.SearchForImagesToolStripMenuItem_Click);
             // 
             // retieveSearchedImagesToolStripMenuItem
             // 
@@ -243,7 +243,7 @@
             this.retieveSearchedImagesToolStripMenuItem.Name = "retieveSearchedImagesToolStripMenuItem";
             this.retieveSearchedImagesToolStripMenuItem.Size = new System.Drawing.Size(189, 24);
             this.retieveSearchedImagesToolStripMenuItem.Text = "Retieve Searched Images";
-            this.retieveSearchedImagesToolStripMenuItem.Click += new System.EventHandler(this.retieveSearchedImagesToolStripMenuItem_Click);
+            this.retieveSearchedImagesToolStripMenuItem.Click += new System.EventHandler(this.RetieveSearchedImagesToolStripMenuItem_Click);
             // 
             // pictureCountLabel
             // 

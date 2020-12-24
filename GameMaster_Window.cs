@@ -220,7 +220,7 @@ namespace Name_That_Logo_Game
             }
         }
 
-        private void retieveSearchedImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RetieveSearchedImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             imageList.Clear();
             imageList.AddRange(imageSearchWindow.RetrieveImages());
@@ -231,7 +231,7 @@ namespace Name_That_Logo_Game
             pictureCountLabel.Text = "Picture 1/" + imageList.Count;
         }
 
-        private void searchForImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SearchForImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             imageSearchWindow = new ImageSearchWindow();
             imageSearchWindow.Show();

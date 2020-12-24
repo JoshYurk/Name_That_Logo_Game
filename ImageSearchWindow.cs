@@ -20,13 +20,10 @@ namespace Name_That_Logo_Game
         // Required
         private const string SAFE_SEARCH_PARAMETER = "&safeSearch=";
 
-        private static string _baseUri = "https://api.bing.microsoft.com/v7.0/images/search";
-        private static string _clientIdHeader = null;
-        private static string _insightsToken = null;
-        private static string _marketCode = "en-us";
-        private static long _nextOffset = 0;
-        private static string _subscriptionKey = "849552c6f7bd47e3b40b0f45789f2e97";
-        private static List<string> ImageUrls = new List<string>();
+        private static readonly string _baseUri = "https://api.bing.microsoft.com/v7.0/images/search";
+        private static readonly string _marketCode = "en-us";
+        private static readonly string _subscriptionKey = "849552c6f7bd47e3b40b0f45789f2e97";
+        private static readonly List<string> ImageUrls = new List<string>();
         private readonly List<string> ImageList;
         private string SafeSearchValue = "Moderate";
         public ImageSearchWindow()
@@ -45,8 +42,6 @@ namespace Name_That_Logo_Game
                 queryString += SAFE_SEARCH_PARAMETER + Uri.EscapeDataString(safeSearch);
 
                 HttpResponseMessage response = await MakeRequestAsync(queryString);
-
-                _clientIdHeader = response.Headers.GetValues("X-MSEdge-ClientID").FirstOrDefault();
 
                 var contentString = await response.Content.ReadAsStringAsync();
                 Dictionary<string, object> searchResponse = JsonConvert.DeserializeObject<Dictionary<string, object>>(contentString);
@@ -144,7 +139,7 @@ namespace Name_That_Logo_Game
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void Button1_Click(object sender, EventArgs e)
         {
             var searchTerm = textBox1.Text;
             var count = (int)numericUpDown1.Value;
