@@ -76,25 +76,24 @@ namespace Name_That_Logo_Game
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    var playerWindow = new GamePlayer_Window();
-                    SetFormLocation(playerWindow, playerScreen);
-                    playerWindow.Show();
-                    playerWindow.Shown += PlayerWindow_Shown;
-                    playerWindow.FormClosed += PlayerWindow_FormClosed;
-                    usedScreens.Add(playerScreen);
-                    player_Windows.Add(playerWindow);
+                    InstatiatePlayerWindow();
                 }
             }
             else
             {
-                var playerWindow = new GamePlayer_Window();
-                SetFormLocation(playerWindow, playerScreen);
-                playerWindow.Show();
-                playerWindow.Shown += PlayerWindow_Shown;
-                playerWindow.FormClosed += PlayerWindow_FormClosed;
-                usedScreens.Add(playerScreen);
-                player_Windows.Add(playerWindow);
+                InstatiatePlayerWindow();
             }
+        }
+
+        private void InstatiatePlayerWindow()
+        {
+            var playerWindow = new GamePlayer_Window();
+            SetFormLocation(playerWindow, playerScreen);
+            playerWindow.Show();
+            playerWindow.Shown += PlayerWindow_Shown;
+            playerWindow.FormClosed += PlayerWindow_FormClosed;
+            usedScreens.Add(playerScreen);
+            player_Windows.Add(playerWindow);
         }
 
         private void PlayerWindow_FormClosed(object sender, FormClosedEventArgs e)

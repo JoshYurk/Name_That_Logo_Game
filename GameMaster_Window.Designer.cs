@@ -36,6 +36,7 @@
             this.previousImageButton = new System.Windows.Forms.Button();
             this.nextImageButton = new System.Windows.Forms.Button();
             this.sendImageToPlayerWindow = new System.Windows.Forms.Button();
+            this.pictureCountLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.initializePlayerScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,6 @@
             this.clearPlayerImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retieveSearchedImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureCountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,7 +86,7 @@
             this.imagePictureSlider.Margin = new System.Windows.Forms.Padding(4);
             this.imagePictureSlider.Name = "imagePictureSlider";
             this.imagePictureSlider.Size = new System.Drawing.Size(1067, 467);
-            this.imagePictureSlider.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imagePictureSlider.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePictureSlider.TabIndex = 0;
             this.imagePictureSlider.TabStop = false;
             // 
@@ -166,6 +166,18 @@
             this.sendImageToPlayerWindow.UseVisualStyleBackColor = true;
             this.sendImageToPlayerWindow.Click += new System.EventHandler(this.SendImageToPlayerWindowButton_Click);
             // 
+            // pictureCountLabel
+            // 
+            this.pictureCountLabel.AutoSize = true;
+            this.pictureCountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pictureCountLabel.Location = new System.Drawing.Point(855, 0);
+            this.pictureCountLabel.Name = "pictureCountLabel";
+            this.pictureCountLabel.Size = new System.Drawing.Size(209, 54);
+            this.pictureCountLabel.TabIndex = 4;
+            this.pictureCountLabel.Text = "Picture 0/0";
+            this.pictureCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -244,18 +256,6 @@
             this.retieveSearchedImagesToolStripMenuItem.Size = new System.Drawing.Size(189, 24);
             this.retieveSearchedImagesToolStripMenuItem.Text = "Retieve Searched Images";
             this.retieveSearchedImagesToolStripMenuItem.Click += new System.EventHandler(this.RetieveSearchedImagesToolStripMenuItem_Click);
-            // 
-            // pictureCountLabel
-            // 
-            this.pictureCountLabel.AutoSize = true;
-            this.pictureCountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pictureCountLabel.Location = new System.Drawing.Point(855, 0);
-            this.pictureCountLabel.Name = "pictureCountLabel";
-            this.pictureCountLabel.Size = new System.Drawing.Size(209, 54);
-            this.pictureCountLabel.TabIndex = 4;
-            this.pictureCountLabel.Text = "Picture 0/0";
-            this.pictureCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GameMaster_Window
             // 
